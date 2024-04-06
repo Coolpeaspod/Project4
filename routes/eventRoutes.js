@@ -3,6 +3,8 @@ const controller = require("../controllers/eventController");
 const Event = require("../models/event"); // Import the Event model
 const multer = require("multer");
 const mongoose = require("mongoose");
+const { isLoggedIn, isAuthor } = require('../middlewares/auth');
+const { validateId } = require('../middlewares/validator');
 
 const router = express.Router();
 
@@ -25,10 +27,10 @@ const upload = multer({
 router.get("/", controller.index);
 
 // GET /events/new
-router.get("/new", controller.new);
+router.get("/new", isLoggedIn, controller.new);
 
 // POST /events
-router.post("/", upload.single("image"), async (req, res, next) => {
+router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {
   try {
     const { topic, title, description, location, startTime, endTime } =
       req.body;
@@ -56,13 +58,13 @@ router.post("/", upload.single("image"), async (req, res, next) => {
 });
 
 // GET /events/:id
-router.get("/:id", controller.show);
+router.get("/:id", validateId, controller.show);
 
 // GET /events/:id/edit
-router.get("/:id/edit", controller.edit);
+router.get("/:id/edit", validateId, isLoggedIn, isAuthor, controller.edit);
 
 // PUT /events/:id
-router.put("/:id", upload.single("image"), async (req, res, next) => {
+router.put("/:id", validateId, isLoggedIn, isAuthor, upload.single("image"), async (req, res, next) => {
   try {
     const eventId = req.params.id;
     const { topic, title, description, location, startTime, endTime } =
@@ -99,6 +101,6 @@ router.put("/:id", upload.single("image"), async (req, res, next) => {
 });
 
 // DELETE /events/:id
-router.delete("/:id", controller.delete);
+router.delete("/:id", validateId, isLoggedIn, isAuthor, controller.delete);
 
 module.exports = router;
