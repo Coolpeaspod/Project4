@@ -73,21 +73,27 @@ button {
   background-color: #082e38;
   border: 2px solid #358b7d;
   color: #358b7d;
+  padding: 10px 10px;
+  border-radius: 10%;
 }
 #buttonLogIn:hover {
   background-color: #358b7d;
   color: #082e38;
   border: 2px solid #358b7d;
+  cursor: pointer;
 }
 #buttonSignUp {
   background-color: #082e38;
   border: 2px solid #358b7d;
   color: #358b7d;
+  padding: 10px 10px;
+  border-radius: 10%;
 }
 #buttonSignUp:hover {
   background-color: #358b7d;
   color: #082e38;
   border: 2px solid #358b7d;
+  cursor: pointer;
 }
 
 /* nav */
@@ -124,6 +130,25 @@ main p {
 
 h4{
   padding-left: 1rem;
+}
+
+.success {
+  background: rgba(108, 192, 112, 0.7);
+  color: #fff;
+  width: 70%;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+  padding: 0.5rem 0;
+
+}
+
+.error {
+  background: rgba(255, 102, 51, 0.7);
+  color: #fff;
+  width: 70%;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+  padding: 0.5rem 0;
 }
 
 /* footer */

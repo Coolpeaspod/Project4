@@ -41,13 +41,13 @@ exports.create = (req, res, next) => {
 //GET /events/:id
 exports.show = (req, res, next) => {
   let id = req.params.id;
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id");
-    err.status = 400;
-    return next(err);
-  }
+  // if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+  //   let err = new Error("Invalid event id");
+  //   err.status = 400;
+  //   return next(err);
+  // }
   model
-    .findById(id)
+    .findById(id).populate('author', 'firstName lastName')
     //.lean() //doesnt work here either
     .then((event) => {
       if (event) {
@@ -66,11 +66,11 @@ exports.show = (req, res, next) => {
 //GET /events/:id/edit:
 exports.edit = (req, res, next) => {
   let id = req.params.id;
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id");
-    err.status = 400;
-    return next(err);
-  }
+  // if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+  //   let err = new Error("Invalid event id");
+  //   err.status = 400;
+  //   return next(err);
+  // }
   model
     .findById(id)
     .then((event) => {
@@ -95,11 +95,11 @@ exports.edit = (req, res, next) => {
 exports.update = (req, res, next) => {
   let event = req.body;
   let id = req.params.id;
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id");
-    err.status = 400;
-    return next(err);
-  }
+  // if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+  //   let err = new Error("Invalid event id");
+  //   err.status = 400;
+  //   return next(err);
+  // }
 
   model
     .findByIdAndUpdate(id, event, {
@@ -110,11 +110,12 @@ exports.update = (req, res, next) => {
       if (event) {
         event.startTime = luxonDateTime;
         res.redirect("/events/" + id);
-      } else {
-        let err = Error("Cannot find event with id " + id);
-        err.status = 404;
-        next(err);
       }
+      // else {
+      //   let err = Error("Cannot find event with id " + id);
+      //   err.status = 404;
+      //   next(err);
+      // }
     })
     .catch((err) => {
       if (err.name === "ValidationError") {
@@ -127,21 +128,22 @@ exports.update = (req, res, next) => {
 //DELETE /events/:id
 exports.delete = (req, res, next) => {
   let id = req.params.id;
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id");
-    err.status = 400;
-    return next(err);
-  }
+  // if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+  //   let err = new Error("Invalid event id");
+  //   err.status = 400;
+  //   return next(err);
+  // }
   model
     .findByIdAndDelete(id)
     .then((event) => {
       if (event) {
         res.redirect("/events");
-      } else {
-        let err = Error("Cannot find event with id " + id);
-        err.status = 404;
-        next(err);
       }
+      // else {
+      //   let err = Error("Cannot find event with id " + id);
+      //   err.status = 404;
+      //   next(err);
+      // }
     })
     .catch((err) => {
       next(err);

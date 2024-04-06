@@ -4,9 +4,13 @@
   "description": "An express event management app",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bson": "^6.5.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "luxon": "^3.4.4",
     "method-override": "^3.0.0",
     "moment": "^2.30.1",

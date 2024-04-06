@@ -22,8 +22,14 @@
         <nav>
             <ul>
                 <li><a href="/events/new" id="newConnection">Start a New Event</a></li>
-                <li><button id="buttonLogIn">Log In</button></li>
-                <li><button id="buttonSignUp">Sign Up</button></li>
+                <%if(!user){%>
+                    <li><a id="buttonLogIn" href="/users/login">Log In</a></li>
+                    <li><a id="buttonSignUp" href="/users/new">Sign Up</a></li>
+                <%}else{%>
+                    <li><a id="buttonSignUp" href="/users/profile">Profile</a></li>
+                    <li><a id="buttonSignUp" href="/users/logout">Logout</a></li>
+                <%}%>
+                
             </ul>
 
         </nav>
@@ -38,3 +44,20 @@
 
         </ul>
     </nav>
+
+    <% if(errorMessages.length > 0) {%>
+        <% errorMessages.forEach(message=>{%>
+            <div class='error'>
+                <%=message%>
+            </div>
+            <%});%>
+                <%}%>
+    
+                    <% if(successMessages.length > 0) {%>
+    
+                        <% successMessages.forEach(message=>{%>
+                            <div class='success'>
+                                <%=message%>
+                            </div>
+                            <%});%>
+                                <%}%>

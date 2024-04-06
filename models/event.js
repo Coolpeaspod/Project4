@@ -14,6 +14,8 @@ const eventSchema = new Schema(
       type: String,
       required: [true, "Title is required"],
     },
+    author:
+      { type: Schema.Types.ObjectId, ref: "User" },
     description: {
       type: String,
       required: [true, "Description is required"],
