@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs') %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <main>
+    <div class="mainInfo">
+      <div class="btn-group-container">
+        <h2>
+          <%= event.topic %> - <%= event.title %>
+        </h2>
+        <form>
+          <button type="submit" formmethod="GET" formaction="/events/<%= event.id %>/edit">
+            <i class="bi bi-pen"></i>
+          </button>
+          <button type="submit" formmethod="post" formaction="/events/<%= event.id %>?_method=DELETE">
+            <i class="bi bi-trash"></i>
+          </button>
+        </form>
+        <div class="eventimg-container">
+          <img src="<%= event.image %>" alt="<%= event.title %>" />
+        </div>
+
+      </div>
+    </div>
+    <div class="eventInfo">
+
+      <p>Start: <%= event.startTime.toLocaleString() %>
+      </p>
+      <p>End: <%= event.endTime.toLocaleString() %>
+      </p>
+
+      <p>Location: <%= event.location %>
+      </p>
+      <p>Description:
+        <%= event.description %>
+      </p>
+    </div>
+    </div>
+  </main>
+  <%- include('../partials/footer.ejs') %>

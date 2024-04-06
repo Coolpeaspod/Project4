@@ -1,0 +1,80 @@
+<%- include('../partials/header.ejs') %>
+
+    <main>
+        <section id="newEvent">
+            <div class="container">
+                <h2>Create a new Event</h2>
+
+                <form action="/events" method="post" enctype="multipart/form-data">
+                    <div class="row mb-3">
+                        <label for="formTopic" class="col-sm-2 col-form-label">Topic</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="formTopic" name="topic" required>
+                                <option value="">Select a Topic</option>
+                                <option value="Education">Education</option>
+                                <option value="Free stuff">Free stuff</option>
+                                <option value="Fun">Fun</option>
+                                <option value="Expos">Expos</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="formTitle" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="formTitle" placeholder="Title" name="title"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="formDescription" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="formDescription" rows="3" name="description"
+                                placeholder="Description" required minlength="10"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="formWhere" class="col-sm-2 col-form-label">Where</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="formWhere" name="location" placeholder="Where"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="formStartTime" class="col-sm-2 col-form-label">Start</label>
+                        <div class="col-sm-10">
+                            <input type="datetime-local" class="form-control" name="startTime" id="formStartTime"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="formEndTime" class="col-sm-2 col-form-label">End</label>
+                        <div class="col-sm-10">
+                            <input type="datetime-local" class="form-control" name="endTime" id="formEndTime" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="formImage" class="col-sm-2 col-form-label">Image</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="formImage" name="image" accept="image/*"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <%- include('../partials/footer.ejs')%>

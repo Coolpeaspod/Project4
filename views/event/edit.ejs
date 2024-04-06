@@ -1,0 +1,86 @@
+<%- include('../partials/header.ejs')%>
+
+    <main>
+        <h4>Edit an event</h4>
+        <div class="content">
+            <form action="/events/<%= event.id %>?_method=PUT" method="post">
+                <div class="row mb-3">
+                    <label for="formTopic" class="col-sm-2 col-form-label">Topic</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="formTopic" name="topic" required>
+                            <option value="Topic" <%=event.topic==="" ? 'selected' : '' %>>Select a Topic</option>
+                            <option value="Education" <%=event.topic==="Education" ? 'selected' : '' %>>Education
+                            </option>
+                            <option value="Free stuff" <%=event.topic==="Free stuff" ? 'selected' : '' %>>Free stuff
+                            </option>
+                            <option value="Fun" <%=event.topic==="Fun" ? 'selected' : '' %>>Fun</option>
+                            <option value="Expose" <%=event.topic==="Expos" ? 'selected' : '' %>>Expos</option>
+                            <option value="Other" <%=event.topic==="Other" ? 'selected' : '' %>>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Repeat the following blocks for other form fields -->
+                <div class="row mb-3">
+                    <label for="formTitle" class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="formTitle" placeholder="Title" name="title"
+                            value="<%= event.title %>" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="formDescription" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="formDescription" rows="3" name="description"
+                            placeholder="Description" required minlength="10"><%= event.description %></textarea>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="formStartTime" class="col-sm-2 col-form-label">Start</label>
+                    <div class="col-sm-10">
+                        <input type="datetime-local" class="form-control" name="startTime" id="formStartTime" <% if
+                            (event.startTime && typeof event.startTime.toISOString==='function' ) { %> value="<%=
+                            event.startTime.toISOString().slice(0, 16) %>" <% } %> required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="formEndTime" class="col-sm-2 col-form-label">End</label>
+                    <div class="col-sm-10">
+                        <input type="datetime-local" class="form-control" name="endTime" id="formEndTime" <% if
+                            (event.endTime && typeof event.endTime.toISOString==='function' ) { %> value="<%=
+                            event.endTime.toISOString().slice(0, 16) %>" <% } %> required>
+                    </div>
+                </div>
+
+
+                <div class="row mb-3">
+                    <label for="formWhere" class="col-sm-2 col-form-label">Where</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="formWhere" name="location" placeholder="Where"
+                            value="<%= event.location %>" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="formImage" class="col-sm-2 col-form-label">Image</label>
+                    <div class="col-sm-10">
+                        <img src="<%= event.image %>" alt="Current Image" class="mt-2" style="max-width: 100%;">
+                        <br>
+                        <small class="text-muted">Current Image</small>
+                        <br>
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <%- include('../partials/footer.ejs')%>

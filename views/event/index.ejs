@@ -1,0 +1,85 @@
+<%- include('../partials/header.ejs') %>
+    <main class="container mt-5">
+        <h2 class="mb-4">Events</h2>
+
+
+
+        <% if(events.some(event=> event.topic === "Education")) {%>
+            <div class="java mb-4">
+                <h5>Education</h5>
+                <ul class="list-group list-group-flush">
+                    <%events.filter(event=> event.topic === "Education").forEach(event => {%>
+                        <li class="list-group-item"><a href="/events/<%=event.id%>">
+                                <%= event.title%>
+                            </a></li>
+                        <% }); %>
+                </ul>
+            </div>
+            <% } %>
+
+
+                <% if(events.some(event=> event.topic === "Fun")) {%>
+                    <div class="java mb-4">
+                        <h5>Fun</h5>
+                        <ul class="list-group list-group-flush">
+                            <%events.filter(event=> event.topic === "Fun").forEach(event => {%>
+                                <li class="list-group-item"><a href="/events/<%=event.id%>">
+                                        <%= event.title%>
+                                    </a></li>
+                                <% }); %>
+                        </ul>
+                    </div>
+                    <% } %>
+
+
+                        <% if(events.some(event=> event.topic === "Free stuff")) {%>
+                            <div class="java mb-4">
+                                <h5>Free stuff</h5>
+                                <ul class="list-group list-group-flush">
+                                    <%events.filter(event=> event.topic === "Free stuff").forEach(event => {%>
+                                        <li class="list-group-item"><a href="/events/<%=event.id%>">
+                                                <%= event.title%>
+                                            </a></li>
+                                        <% }); %>
+                                </ul>
+                            </div>
+                            <% } %>
+
+                                <% if(events.some(event=> event.topic === "Expos")) {%>
+                                    <div class="java mb-4">
+                                        <h5>Expos</h5>
+                                        <ul class="list-group list-group-flush">
+                                            <%events.filter(event=> event.topic === "Expos").forEach(event => {%>
+                                                <li class="list-group-item"><a href="/events/<%=event.id%>">
+                                                        <%= event.title%>
+                                                    </a></li>
+                                                <% }); %>
+                                        </ul>
+                                    </div>
+                                    <% } %>
+
+
+                                        <% if(events.some(event=> event.topic === "Other")) {%>
+                                            <div class="java mb-4">
+                                                <h5>Other</h5>
+                                                <ul class="list-group list-group-flush">
+                                                    <%events.filter(event=> event.topic === "Other").forEach(event =>
+                                                        {%>
+                                                        <li class="list-group-item"><a href="/events/<%=event.id%>">
+                                                                <%= event.title%>
+                                                            </a></li>
+                                                        <% }); %>
+                                                </ul>
+                                            </div>
+                                            <% } %>
+
+
+                                                <% if(!events.some(event=> event.topic === "Fun" || event.topic ===
+                                                    "Education" || event.topic == "Free stuff" || event.topic ==
+                                                    "Expos" || event.topic === "Other")) {%>
+                                                    <h6>There are no events. But you can add a new event.</h6>
+                                                    <% } %>
+
+
+    </main>
+    <%- include('../partials/footer.ejs')%>

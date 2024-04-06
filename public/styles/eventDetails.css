@@ -1,0 +1,57 @@
+.btn-group-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-group button {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.eventimg-container,
+.eventInfo {
+  display: inline-block;
+}
+
+.eventInfo h2 {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.eventimg-container {
+  width: 40%;
+}
+
+.eventimg-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  min-width: 300px;
+}
+
+@media screen and (max-width: 600px) {
+  .btn-group-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .eventimg-container {
+    width: 100%;
+  }
+  .eventInfo {
+    width: 100%;
+  }
+  .eventInfo h2 {
+    width: 100%;
+  }
+}
