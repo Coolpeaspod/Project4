@@ -31,10 +31,10 @@ exports.isAuthor = (req, res, next) => {
     //     err.status = 400;
     //     return next(err);
     // }
-    Story.findById(id)
-        .then(story => {
-            if (story) {
-                if (story.author == req.session.user) {
+    Event.findById(id)
+        .then(event => {
+            if (event) {
+                if (event.author == req.session.user) {
                     return next();
                 }
                 else {
@@ -44,7 +44,7 @@ exports.isAuthor = (req, res, next) => {
                 }
             }
             else {
-                let err = new Error("Story cannot be found");
+                let err = new Error("event cannot be found");
                 err.status = 404;
                 return next(err)
             }
