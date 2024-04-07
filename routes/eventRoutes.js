@@ -32,7 +32,7 @@ router.get("/new", isLoggedIn, controller.new);
 // POST /events
 router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {
   try {
-    const { topic, title, description, location, startTime, endTime } =
+    const { topic, title, author, description, location, startTime, endTime } =
       req.body;
     const image = req.file ? "/uploads/" + req.file.filename : "";
 
@@ -40,6 +40,7 @@ router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {
     const newEvent = new Event({
       topic,
       title,
+      author,
       description,
       location,
       startTime,
@@ -67,7 +68,7 @@ router.get("/:id/edit", validateId, isLoggedIn, isAuthor, controller.edit);
 router.put("/:id", validateId, isLoggedIn, isAuthor, upload.single("image"), async (req, res, next) => {
   try {
     const eventId = req.params.id;
-    const { topic, title, description, location, startTime, endTime } =
+    const { topic, title, author, description, location, startTime, endTime } =
       req.body;
     const image = req.file ? "/uploads/" + req.file.filename : "";
 
@@ -78,6 +79,7 @@ router.put("/:id", validateId, isLoggedIn, isAuthor, upload.single("image"), asy
       {
         topic,
         title,
+        author,
         description,
         location,
         startTime,
