@@ -15,7 +15,7 @@ a {
 }
 
 /* body */
-body{
+body {
   min-height: 100vh;
 }
 
@@ -122,13 +122,13 @@ main {
 main p {
   margin-top: 50px;
 }
-.content{
+.content {
   padding-left: 1rem;
   padding-top: 0.5rem;
   line-height: 1px;
 }
 
-h4{
+h4 {
   padding-left: 1rem;
 }
 
@@ -139,7 +139,6 @@ h4{
   margin: 0 auto 1rem auto;
   text-align: center;
   padding: 0.5rem 0;
-
 }
 
 .error {
@@ -153,7 +152,7 @@ h4{
 
 /* footer */
 footer {
-  display: flex; 
+  display: flex;
   flex-direction: row;
   /* position: absolute; 
   bottom: 0;
@@ -165,9 +164,7 @@ footer {
   /* margin-top: 1rem; */
   width: 100vw;
   height: 50px;
-
 }
-
 
 footer p {
   color: #eaede8;

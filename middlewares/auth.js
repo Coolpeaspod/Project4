@@ -1,5 +1,5 @@
 const Event = require("../models/event");
-const { isValidated } = require("./validator");
+const { validateId } = require("./validator");
 
 //check if user is a guest
 exports.isGuest = (req, res, next) => {
@@ -36,7 +36,7 @@ exports.isAuthor = (req, res, next) => {
         err.status = 404;
         return next(err);
       }
-      if (event.author.equals(req.session.user._id)) {
+      if (event.author === req.session.user._id) {
         // The logged-in user is the author of the event
         return next();
       } else {
