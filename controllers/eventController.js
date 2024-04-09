@@ -1,5 +1,5 @@
 const model = require("../models/event");
-const luxon = require('luxon');
+const luxon = require("luxon");
 
 //GET /events: send all the events
 exports.index = (req, res, next) => {
@@ -47,7 +47,8 @@ exports.show = (req, res, next) => {
   //   return next(err);
   // }
   model
-    .findById(id).populate('author', 'firstName lastName')
+    .findById(id)
+    .populate("author", "firstName lastName")
     //.lean() //doesnt work here either
     .then((event) => {
       if (event) {
