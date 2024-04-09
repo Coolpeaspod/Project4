@@ -24,10 +24,11 @@ exports.new = (req, res) => {
 //POST /events
 exports.create = (req, res, next) => {
   let event = new model(req.body);
-  event
-    .save(event)
+  event.author = req.session.user;
+  console.log(event);
+  event.save()
     .then((event) => {
-      console.log(event);
+
       res.redirect("/events");
     })
     .catch((err) => {

@@ -29,34 +29,39 @@ router.get("/", controller.index);
 // GET /events/new
 router.get("/new", isLoggedIn, controller.new);
 
+//POST /events
+router.post('/', isLoggedIn, controller.create);
+
 // POST /events
-router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {
-  try {
-    const { topic, title, author, description, location, startTime, endTime } =
-      req.body;
-    const image = req.file ? "/uploads/" + req.file.filename : "";
+// router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {
+//   try {
+//     const { topic, title, author, description, location, startTime, endTime } =
+//       req.body;
+//     const image = req.file ? "/uploads/" + req.file.filename : "";
 
-    // Create a new event instance
-    const newEvent = new Event({
-      topic,
-      title,
-      author,
-      description,
-      location,
-      startTime,
-      endTime,
-      image,
-    });
+//     // Create a new event instance
+//     const newEvent = new Event({
+//       topic,
+//       title,
+//       author,
+//       description,
+//       location,
+//       startTime,
+//       endTime,
+//       image,
+//     });
+//     newEvent.author = req.session.user;
+//     console.log(newEvent);
 
-    // Save the new event
-    await newEvent.save();
+//     // Save the new event
+//     await newEvent.save();
 
-    // Redirect to the event show page or any other desired page
-    res.redirect(`/events/${newEvent._id}`);
-  } catch (err) {
-    next(err);
-  }
-});
+//     // Redirect to the event show page or any other desired page
+//     res.redirect(`/events/${newEvent._id}`);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 // GET /events/:id
 router.get("/:id", validateId, controller.show);
