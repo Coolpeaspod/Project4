@@ -1,19 +1,27 @@
 <%- include('../partials/header.ejs') %>
-  <main>
-    <form action = '/users' method = 'POST' class="user-form">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName" required>
-        
-        <label for="lastName">Last Name</label></td>
-        <input type="text" id="lastName" name="lastName" required></td>
-       
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email">
-        
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" minlength="8" required>
-
-        <input type="submit" value="Sign Up">      
-</form>
+  <main class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form action="/users" method="POST" class="user-form">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+    </div>
   </main>
   <%- include('../partials/footer.ejs') %>
