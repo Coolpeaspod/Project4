@@ -3,8 +3,8 @@ const controller = require("../controllers/eventController");
 const Event = require("../models/event"); // Import the Event model
 const multer = require("multer");
 const mongoose = require("mongoose");
-const { isLoggedIn, isAuthor } = require('../middlewares/auth');
-const { validateId } = require('../middlewares/validator');
+const { isLoggedIn, isAuthor } = require("../middlewares/auth");
+const { validateId } = require("../middlewares/validator");
 
 const router = express.Router();
 
@@ -65,18 +65,16 @@ router.get("/:id", validateId, controller.show);
 router.get("/:id/edit", validateId, isLoggedIn, isAuthor, controller.edit);
 
 // PUT /events/:id
-router.put("/:id", validateId, isLoggedIn, isAuthor, upload.single("image"), async (req, res, next) => {
-  try {
-    const eventId = req.params.id;
-    const { topic, title, author, description, location, startTime, endTime } =
-      req.body;
-    const image = req.file ? "/uploads/" + req.file.filename : "";
-
-
-    // Find the event by ID and update it
-    const updatedEvent = await Event.findByIdAndUpdate(
-      eventId,
-      {
+router.put(
+  "/:id",
+  validateId,
+  isLoggedIn,
+  isAuthor,
+  upload.single("image"),
+  async (req, res, next) => {
+    try {
+      const eventId = req.params.id;
+      const {
         topic,
         title,
         author,
@@ -84,23 +82,38 @@ router.put("/:id", validateId, isLoggedIn, isAuthor, upload.single("image"), asy
         location,
         startTime,
         endTime,
-        // image,
-      },
-      { new: true }
-    ); // Set { new: true } to return the updated document
+      } = req.body;
+      const image = req.file ? "/uploads/" + req.file.filename : "";
 
-    if (!updatedEvent) {
-      let err = Error("Cannot update event with id " + eventId);
-      err.status = 400;
-      throw err;
+      // Find the event by ID and update it
+      const updatedEvent = await Event.findByIdAndUpdate(
+        eventId,
+        {
+          topic,
+          title,
+          author,
+          description,
+          location,
+          startTime,
+          endTime,
+          // image,
+        },
+        { new: true }
+      ); // Set { new: true } to return the updated document
+
+      if (!updatedEvent) {
+        let err = Error("Cannot update event with id " + eventId);
+        err.status = 400;
+        throw err;
+      }
+
+      // Redirect to the updated event show page or any other desired page
+      res.redirect(`/events/${eventId}`);
+    } catch (err) {
+      next(err);
     }
-
-    // Redirect to the updated event show page or any other desired page
-    res.redirect(`/events/${eventId}`);
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 // DELETE /events/:id
 router.delete("/:id", validateId, isLoggedIn, isAuthor, controller.delete);
