@@ -78,30 +78,30 @@ app.get("/contact", (req, res) => {
   res.render("contact");
 });
 
-app.get("/events/:id", (req, res) => {
-  let event = events.findById(req.params.id);
+// app.get("/events/:id", (req, res) => {
+//   let event = events.findById(req.params.id);
 
-  // Log the image path
-  console.log("Image Path:", event.image);
+//   // Log the image path
+//   console.log("Image Path:", event.image);
 
-  // Format times in 12-hour format if needed
+//   // Format times in 12-hour format if needed
 
-  res.render("event/show", {
-    event,
-  });
-});
+//   res.render("event/show", {
+//     event,
+//   });
+// });
 
-app.get("/events/:id/edit", (req, res) => {
-  let id = req.params.id;
-  res.render("edit", { id });
-});
+// app.get("/events/:id/edit", (req, res) => {
+//   let id = req.params.id;
+//   res.render("edit", { id });
+// });
 
-app.get("/events/new", (req, res) => {
-  const newEvent = createNewEvent(); // Make sure createNewEvent is defined
-  console.log("New Event:", newEvent);
+// app.get("/events/new", (req, res) => {
+//   const newEvent = createNewEvent(); // Make sure createNewEvent is defined
+//   console.log("New Event:", newEvent);
 
-  res.render("event/new", { event: newEvent });
-});
+//   res.render("event/new", { event: newEvent });
+// });
 
 app.use((req, res, next) => {
   let err = new Error("The server cannot locate " + req.url);
@@ -119,10 +119,10 @@ app.use((err, req, res, next) => {
   res.render("error", { error: err });
 });
 
-app.get("/events/:id/edit", (req, res) => {
-  let id = req.params.id;
-  let event = events.findById(id);
-  res.render("edit", { id, event });
-});
+// app.get("/events/:id/edit", (req, res) => {
+//   let id = req.params.id;
+//   let event = events.findById(id);
+//   res.render("edit", { id, event });
+// });
 
 //start the server

@@ -29,34 +29,39 @@ router.get("/", controller.index);
 // GET /events/new
 router.get("/new", isLoggedIn, controller.new);
 
+//POST /events
+router.post('/', isLoggedIn, controller.create);
+
 // POST /events
-router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {
-  try {
-    const { topic, title, author, description, location, startTime, endTime } =
-      req.body;
-    const image = req.file ? "/uploads/" + req.file.filename : "";
+// router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {
+//   try {
+//     const { topic, title, author, description, location, startTime, endTime } =
+//       req.body;
+//     const image = req.file ? "/uploads/" + req.file.filename : "";
 
-    // Create a new event instance
-    const newEvent = new Event({
-      topic,
-      title,
-      author,
-      description,
-      location,
-      startTime,
-      endTime,
-      image,
-    });
+//     // Create a new event instance
+//     const newEvent = new Event({
+//       topic,
+//       title,
+//       author,
+//       description,
+//       location,
+//       startTime,
+//       endTime,
+//       image,
+//     });
+//     newEvent.author = req.session.user;
+//     console.log(newEvent);
 
-    // Save the new event
-    await newEvent.save();
+//     // Save the new event
+//     await newEvent.save();
 
-    // Redirect to the event show page or any other desired page
-    res.redirect(`/events/${newEvent._id}`);
-  } catch (err) {
-    next(err);
-  }
-});
+//     // Redirect to the event show page or any other desired page
+//     res.redirect(`/events/${newEvent._id}`);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 // GET /events/:id
 router.get("/:id", validateId, controller.show);
@@ -64,56 +69,46 @@ router.get("/:id", validateId, controller.show);
 // GET /events/:id/edit
 router.get("/:id/edit", validateId, isLoggedIn, isAuthor, controller.edit);
 
+//PUT /events/:id
+router.put('/:id', validateId, isLoggedIn, isAuthor, controller.update);
+
 // PUT /events/:id
-router.put(
-  "/:id",
-  validateId,
-  isLoggedIn,
-  isAuthor,
-  upload.single("image"),
-  async (req, res, next) => {
-    try {
-      const eventId = req.params.id;
-      const {
-        topic,
-        title,
-        author,
-        description,
-        location,
-        startTime,
-        endTime,
-      } = req.body;
-      const image = req.file ? "/uploads/" + req.file.filename : "";
+// router.put("/:id", validateId, isLoggedIn, isAuthor, upload.single("image"), async (req, res, next) => {
+//   try {
+//     const eventId = req.params.id;
+//     const { topic, title, author, description, location, startTime, endTime } =
+//       req.body;
+//     const image = req.file ? "/uploads/" + req.file.filename : "";
 
-      // Find the event by ID and update it
-      const updatedEvent = await Event.findByIdAndUpdate(
-        eventId,
-        {
-          topic,
-          title,
-          author,
-          description,
-          location,
-          startTime,
-          endTime,
-          // image,
-        },
-        { new: true }
-      ); // Set { new: true } to return the updated document
 
-      if (!updatedEvent) {
-        let err = Error("Cannot update event with id " + eventId);
-        err.status = 400;
-        throw err;
-      }
+//     // Find the event by ID and update it
+//     const updatedEvent = await Event.findByIdAndUpdate(
+//       eventId,
+//       {
+//         topic,
+//         title,
+//         author,
+//         description,
+//         location,
+//         startTime,
+//         endTime,
+//         // image,
+//       },
+//       { new: true }
+//     ); // Set { new: true } to return the updated document
 
-      // Redirect to the updated event show page or any other desired page
-      res.redirect(`/events/${eventId}`);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
+//     if (!updatedEvent) {
+//       let err = Error("Cannot update event with id " + eventId);
+//       err.status = 400;
+//       throw err;
+//     }
+
+//     // Redirect to the updated event show page or any other desired page
+//     res.redirect(`/events/${eventId}`);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 // DELETE /events/:id
 router.delete("/:id", validateId, isLoggedIn, isAuthor, controller.delete);
