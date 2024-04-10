@@ -59,9 +59,10 @@ exports.show = (req, res, next) => {
     .findById(id)
     .populate("author", "firstName lastName")
     //.lean() //doesnt work here either
-    .then((event) => {
+    .then(event => {
       if (event) {
-        res.render("./event/show", { event });
+        console.log(event);
+        return res.render("./event/show", { event });
       } else {
         let err = Error("Cannot find event with id " + id);
         err.status = 404;
@@ -118,8 +119,8 @@ exports.update = (req, res, next) => {
     })
     .then((event) => {
       if (event) {
-        event.startTime = luxonDateTime;
-        res.redirect("/events/" + id);
+        //event.startTime = luxonDateTime;
+        return res.redirect("/events/" + id);
       }
       // else {
       //   let err = Error("Cannot find event with id " + id);
@@ -147,7 +148,7 @@ exports.delete = (req, res, next) => {
     .findByIdAndDelete(id)
     .then((event) => {
       if (event) {
-        res.redirect("/events");
+        return res.redirect("/events");
       }
       // else {
       //   let err = Error("Cannot find event with id " + id);
