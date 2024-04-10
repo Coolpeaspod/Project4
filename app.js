@@ -1,13 +1,13 @@
 //require modules
-const express = require('express');
-const morgan = require('morgan');
-const methodOverride = require('method-override');
-const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const flash = require('connect-flash');
-const eventRoutes = require('./routes/eventRoutes');
-const userRoutes = require('./routes/userRoutes');
+const express = require("express");
+const morgan = require("morgan");
+const methodOverride = require("method-override");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const flash = require("connect-flash");
+const eventRoutes = require("./routes/eventRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const { findById } = require("./models/event");
 const uri =
@@ -26,8 +26,11 @@ app.use(
     secret: "ajfeirf90aeu9eroejfoefj",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongoUrl: 'mongodb+srv://panelpermit0x:v522C1EzZrg8dups@cluster0.kklwwjs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0' }),
-    cookie: { maxAge: 60 * 60 * 1000 }
+    store: new MongoStore({
+      mongoUrl:
+        "mongodb+srv://panelpermit0x:v522C1EzZrg8dups@cluster0.kklwwjs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    }),
+    cookie: { maxAge: 60 * 60 * 1000 },
   })
 );
 app.use(flash());
@@ -35,8 +38,8 @@ app.use(flash());
 app.use((req, res, next) => {
   //console.log(req.session);
   res.locals.user = req.session.user || null;
-  res.locals.errorMessages = req.flash('error');
-  res.locals.successMessages = req.flash('success');
+  res.locals.errorMessages = req.flash("error");
+  res.locals.successMessages = req.flash("success");
   next();
 });
 
@@ -65,7 +68,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/events", eventRoutes);
-app.use('/users', userRoutes);
+app.use("/users", userRoutes);
 
 app.get("/about", (req, res) => {
   res.render("about");
@@ -101,10 +104,9 @@ app.get("/contact", (req, res) => {
 // });
 
 app.use((req, res, next) => {
-  let err = new Error('The server cannot locate ' + req.url);
+  let err = new Error("The server cannot locate " + req.url);
   err.status = 404;
   next(err);
-
 });
 
 app.use((err, req, res, next) => {

@@ -3,8 +3,8 @@ const controller = require("../controllers/eventController");
 const Event = require("../models/event"); // Import the Event model
 const multer = require("multer");
 const mongoose = require("mongoose");
-const { isLoggedIn, isAuthor } = require('../middlewares/auth');
-const { validateId } = require('../middlewares/validator');
+const { isLoggedIn, isAuthor } = require("../middlewares/auth");
+const { validateId } = require("../middlewares/validator");
 
 const router = express.Router();
 
