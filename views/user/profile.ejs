@@ -1,17 +1,34 @@
 <%- include('../partials/header.ejs') %>
   <main>
-    <h2>Welcome, <%=user.firstName%>
+    <h2>Welcome, <%= user.firstName %>
     </h2>
-    <%if(events.length> 0){%>
+
+    <% if (events.length> 0) { %>
       <p>You have created these events</p>
-      <%events.forEach(event=>{%>
-        <a href="/events/<%=event.id%>">
-          <p>
-            <%=event.title%>
-          </p>
-        </a>
-        <%}) } else{%>
-          <p>You have not created any events</p>
-          <%}%>
+      <% events.forEach(event=> { %>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <a href="/events/<%= event.id %>">
+            <p class="mb-0">
+              <%= event.title %>
+            </p>
+          </a>
+          <div class="d-flex align-items-center">
+            <!-- Edit Button with Icon -->
+            <a href="/events/<%= event.id %>/edit" class="btn btn-primary me-2">
+              <i class="bi bi-pencil-fill"></i>
+            </a>
+            <!-- Delete Button with Icon -->
+            <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <% }); %>
+          <% } else { %>
+            <p>You have not created any events</p>
+            <% } %>
   </main>
   <%- include('../partials/footer.ejs') %>
