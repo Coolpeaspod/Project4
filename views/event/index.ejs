@@ -32,11 +32,11 @@
                     <% } %>
 
 
-                        <% if(events.some(event=> event.topic === "Free stuff")) {%>
+                        <% if(events.some(event=> event.topic === "Free Stuff")) {%>
                             <div class="java mb-4">
-                                <h5>Free stuff</h5>
+                                <h5>Free Stuff</h5>
                                 <ul class="list-group list-group-flush">
-                                    <%events.filter(event=> event.topic === "Free stuff").forEach(event => {%>
+                                    <%events.filter(event=> event.topic === "Free Stuff").forEach(event => {%>
                                         <li class="list-group-item"><a href="/events/<%=event.id%>">
                                                 <%= event.title%>
                                             </a></li>
