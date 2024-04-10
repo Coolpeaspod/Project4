@@ -1,5 +1,5 @@
 const model = require("../models/event");
-const luxon = require('luxon');
+//const luxon = require('luxon');
 
 //GET /events: send all the events
 exports.index = (req, res, next) => {
@@ -25,10 +25,15 @@ exports.new = (req, res) => {
 exports.create = (req, res, next) => {
   let event = new model(req.body);
   event.author = req.session.user;
-  console.log(event);
+  if (event) {
+    console.log("working");
+    console.log(event);
+    console.log("author", event.author);
+  }
+
   event.save()
     .then((event) => {
-
+      console.log(event);
       res.redirect("/events");
     })
     .catch((err) => {
