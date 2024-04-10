@@ -27,10 +27,11 @@ exports.new = (req, res) => {
 exports.create = (req, res, next) => {
   let event = new model(req.body);
   event.author = req.session.user;
+  event.image = req.file ? "/uploads/" + req.file.filename : "";
   if (event) {
     console.log("working");
     console.log(event);
-    console.log("author", event.author);
+    console.log(req.body);
   }
 
   event.save()

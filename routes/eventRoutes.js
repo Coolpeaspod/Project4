@@ -30,7 +30,7 @@ router.get("/", controller.index);
 router.get("/new", isLoggedIn, controller.new);
 
 //POST /events
-router.post('/', isLoggedIn, controller.create);
+router.post('/', isLoggedIn, upload.single('image'), controller.create);
 
 // POST /events
 // router.post("/", isLoggedIn, upload.single("image"), async (req, res, next) => {

@@ -1,5 +1,5 @@
 const Event = require("../models/event");
-const { isValidated } = require("./validator");
+// const { isValidated } = require("./validator");
 
 //check if user is a guest
 exports.isGuest = (req, res, next) => {
