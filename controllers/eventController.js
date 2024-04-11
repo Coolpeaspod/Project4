@@ -1,4 +1,5 @@
 const model = require("../models/event");
+const flash = require('connect-flash');
 
 //const luxon = require('luxon');
 
@@ -37,6 +38,7 @@ exports.create = (req, res, next) => {
   event.save()
     .then((event) => {
       console.log(event);
+      req.flash('success', 'Event created successfully');
       res.redirect("/events");
     })
     .catch((err) => {
@@ -120,6 +122,7 @@ exports.update = (req, res, next) => {
     .then((event) => {
       if (event) {
         //event.startTime = luxonDateTime;
+        req.flash('success', 'Event updated successfully');
         return res.redirect("/events/" + id);
       }
       // else {
@@ -148,6 +151,7 @@ exports.delete = (req, res, next) => {
     .findByIdAndDelete(id)
     .then((event) => {
       if (event) {
+        req.flash('success', 'Event deleted successfully');
         return res.redirect("/events");
       }
       // else {
