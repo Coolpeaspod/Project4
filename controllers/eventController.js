@@ -1,7 +1,5 @@
 const model = require("../models/event");
-
-//const luxon = require('luxon');
-
+const luxon = require("luxon");
 
 //GET /events: send all the events
 exports.index = (req, res, next) => {
