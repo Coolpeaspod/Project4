@@ -6,23 +6,27 @@
         <h2>
           <%= event.topic %> - <%= event.title %>
         </h2>
-        <%if(user == event.author._id){%>
-        <form>
-          <button type="submit" formmethod="GET" formaction="/events/<%= event.id %>/edit">
-            <i class="bi bi-pen"></i>
-          </button>
-          <button type="submit" formmethod="post" formaction="/events/<%= event.id %>?_method=DELETE">
-            <i class="bi bi-trash"></i>
-          </button>
-        </form>
-      <%}%>
-        <div class="eventimg-container">
-          <img src="<%= event.image %>" alt="<%= event.title %>" />
-        </div>
+        <%if(user==event.author._id){%>
+          <form>
+            <button type="submit" formmethod="GET" formaction="/events/<%= event.id %>/edit">
+              <i class="bi bi-pen"></i>
+            </button>
+            <button type="submit" formmethod="post" formaction="/events/<%= event.id %>?_method=DELETE">
+              <i class="bi bi-trash"></i>
+            </button>
+          </form>
+          <%}%>
+            <div class="eventimg-container">
+              <img src="<%= event.image %>" alt="<%= event.title %>" />
+            </div>
 
       </div>
     </div>
     <div class="eventInfo">
+
+      <p>Host: <%= event.author.firstName %>
+          <%= event.author.lastName %>
+      </p>
 
       <p>Start: <%= event.startTime.toLocaleString() %>
       </p>
